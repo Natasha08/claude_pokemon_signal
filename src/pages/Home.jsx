@@ -20,7 +20,10 @@ export default function Home() {
           )}
         </div>
         {currentUser ? (
-          <Button variant="outline" onClick={logout}>Log Out</Button>
+          <div className="flex flex-col gap-3 w-full max-w-xs">
+            <Button onClick={() => navigate('/tetris')}>Play Tetris</Button>
+            <Button variant="outline" onClick={logout}>Log Out</Button>
+          </div>
         ) : (
           <div className="flex flex-col gap-3 w-full max-w-xs">
             <Button onClick={() => navigate('/signup')}>Sign Up</Button>
