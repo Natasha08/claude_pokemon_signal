@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(printf 'y\\\\n' | npm create vite@latest . -- --template react 2>&1)",
+      "Bash(yes | npm create vite@latest . -- --template react 2>&1 || true)"
+    ]
+  }
+}
