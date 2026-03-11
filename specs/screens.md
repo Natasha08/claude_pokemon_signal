@@ -6,3 +6,4 @@
 - [Signup](./screens/signup.md)
 - [Tetris](./screens/tetris.md)
 - [Drum Machine](./screens/drum-machine.md)
+- [Mario](./screens/mario.md)

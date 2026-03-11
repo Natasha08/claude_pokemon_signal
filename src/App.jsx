@@ -4,6 +4,7 @@ import Login from './pages/Login'
 import Signup from './pages/Signup'
 import Tetris from './pages/Tetris'
 import DrumMachine from './pages/DrumMachine'
+import Mario from './pages/Mario'
 
 export default function App() {
   return (
@@ -13,6 +14,7 @@ export default function App() {
       <Route path="/signup" element={<Signup />} />
       <Route path="/tetris" element={<Tetris />} />
       <Route path="/drum-machine" element={<DrumMachine />} />
+      <Route path="/mario" element={<Mario />} />
     </Routes>
   )
 }

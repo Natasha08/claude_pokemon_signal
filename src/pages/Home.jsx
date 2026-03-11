@@ -23,6 +23,7 @@ export default function Home() {
           <div className="flex flex-col gap-3 w-full max-w-xs">
             <Button onClick={() => navigate('/tetris')}>Play Tetris</Button>
             <Button onClick={() => navigate('/drum-machine')}>Drum Machine</Button>
+            <Button onClick={() => navigate('/mario')}>Mario</Button>
             <Button variant="outline" onClick={logout}>Log Out</Button>
           </div>
         ) : (
