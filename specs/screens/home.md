@@ -16,6 +16,7 @@ Logged-out state:
 Logged-in state:
 - "Welcome, {username}" message below the name
 - "Play Tetris" button (primary) — navigates to /tetris
+- "Drum Machine" button (primary) — navigates to /drum-machine
 - "Log Out" button (outline style) — calls logout API and returns to logged-out state
 
 Loading state:
