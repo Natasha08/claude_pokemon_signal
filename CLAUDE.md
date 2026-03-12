@@ -39,6 +39,7 @@ Each commit message should include:
 - A blank line
 - The exact prompt the user entered that led to the changes
 - A bullet list of files changed and what changed in each
+- A `Co-Authored-By: Claude Sonnet 4.6 <noreply@anthropic.com>` trailer
 
 When the prompt is a short reply to something Claude suggested (e.g. "yes", "do that", "can't i automate that"), add a sentence of context explaining what the user was responding to.
 
@@ -50,6 +51,8 @@ Prompt: "I need an environment variable for origin then. written similar to PORT
 
 - server/index.js: added ORIGIN constant from process.env.ORIGIN, used in CORS origin config
 - .env: added ORIGIN=http://localhost:5173
+
+Co-Authored-By: Claude Sonnet 4.6 <noreply@anthropic.com>
 ```
 
 ## last save point
