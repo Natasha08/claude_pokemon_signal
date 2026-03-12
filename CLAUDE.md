@@ -10,7 +10,7 @@ This project uses [mise](https://mise.jdx.dev/) to manage tooling. Run `mise ins
 
 ## Fresh clone setup
 
-If the user asks you to set up the project locally, read `specs/setup.md` and follow the instructions there. Ask the user for any required values that have no default (e.g. `JWT_SECRET`).
+If the user asks you to set up the project locally, read `specs/setup.md` and follow the instructions there. Ask the user for any required values that have no default (e.g. `JWT_SECRET`). After setup is complete, ask the user if they'd like you to run the API server and frontend for them.
 
 ## Spec
 Read the spec in `/specs/app.md` to build the app

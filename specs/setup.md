@@ -10,7 +10,7 @@ mise install          # install Node.js
 npm install           # install dependencies
 npm run setup         # install git hooks
 cp .env.example .env  # copy env template — fill in values
-createdb hello_world  # create the database
+createdb claude_pokemon  # create the database
 npm run migrate       # create tables
 ```
 
@@ -19,7 +19,7 @@ Copy `.env.example` to `.env`. Never commit `.env` — it is gitignored.
 
 | Variable       | Description                                      | Default   |
 |----------------|--------------------------------------------------|-----------|
-| `DATABASE_URL` | Postgres connection string                       | required  |
+| `DATABASE_URL` | Postgres connection string                       | `postgres://localhost/claude_pokemon` |
 | `JWT_SECRET`   | Long random string for signing session JWTs      | required  |
 | `PORT`         | Port for the API server                          | `3001`    |
 | `ORIGIN`       | Allowed CORS origin for the frontend             | `http://localhost:5173` |
