@@ -3,14 +3,19 @@
 Route: `/signup`
 Purpose: Allows new users to create an account.
 
+## Visual style
+Matches home page horror/sci-fi aesthetic: dark background, scanlines, grain, red glow title, cyan input labels, monospace font.
+
 Layout:
-- Centered card on full screen
-- Title: "Create an account"
-- Username input
-- Password input (min 4 characters)
-- Confirm Password input
-- Submit button: "Sign Up"
-- Link below: "Already have an account? Log in" → navigates to /login
+- Full screen dark background with scanlines + grain overlays
+- "New Registration" label above title
+- Title: "Identify" in Abril Fatface with red pulse-glow
+- Glowing red horizontal divider
+- "Choose Identity" (username) input
+- "Passphrase" (password) input, min 4 characters
+- "Confirm Passphrase" input
+- "Register" submit button (red primary)
+- Link below: "Already registered? Enter" → navigates to /login
 
 Behavior:
 - All fields required; show inline error if empty

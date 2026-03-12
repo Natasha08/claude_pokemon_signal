@@ -1,9 +1,5 @@
 import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
-import { Label } from '@/components/ui/label'
-import { Card, CardHeader, CardTitle, CardContent, CardFooter } from '@/components/ui/card'
 import { useAuth } from '@/context/AuthContext'
 
 export default function Login() {
@@ -31,50 +27,95 @@ export default function Login() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-neutral-50 px-4">
-      <Card className="w-full max-w-sm">
-        <CardHeader>
-          <CardTitle>Welcome back</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <form onSubmit={handleSubmit} className="flex flex-col gap-4" noValidate>
-            {errors.form && (
-              <p className="text-sm text-red-500 text-center">{errors.form}</p>
-            )}
-            <div className="flex flex-col gap-1.5">
-              <Label htmlFor="username">Username</Label>
-              <Input
-                id="username"
-                type="text"
-                placeholder="janesmith"
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
-              />
-              {errors.username && <p className="text-sm text-red-500">{errors.username}</p>}
-            </div>
-            <div className="flex flex-col gap-1.5">
-              <Label htmlFor="password">Password</Label>
-              <Input
-                id="password"
-                type="password"
-                placeholder="••••••••"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-              />
-              {errors.password && <p className="text-sm text-red-500">{errors.password}</p>}
-            </div>
-            <Button type="submit" className="w-full mt-2">Log In</Button>
-          </form>
-        </CardContent>
-        <CardFooter className="justify-center">
-          <p className="text-sm text-neutral-500">
-            Don't have an account?{' '}
-            <Link to="/signup" className="font-medium text-neutral-900 hover:underline">
-              Sign up
-            </Link>
+    <div style={{ background: '#0a0a0f', minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '2rem' }}>
+      <div className="scanlines" />
+      <div className="grain" />
+
+      <div style={{ position: 'relative', zIndex: 10, width: '100%', maxWidth: '340px', display: 'flex', flexDirection: 'column', gap: '2rem' }}>
+
+        <div style={{ textAlign: 'center' }}>
+          <p className="retro-mono text-glow-cyan" style={{ fontSize: '0.65rem', letterSpacing: '0.4em', textTransform: 'uppercase', marginBottom: '0.5rem', opacity: 0.7 }}>
+            Restricted Access
           </p>
-        </CardFooter>
-      </Card>
+          <h1 className="retro-heading pulse-glow text-glow-red" style={{ fontSize: '2.75rem', margin: 0, lineHeight: 1 }}>
+            Enter
+          </h1>
+        </div>
+
+        <div style={{ width: '100%', height: '1px', background: 'linear-gradient(to right, transparent, #cc0000, transparent)', boxShadow: '0 0 8px #cc0000' }} />
+
+        <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }} noValidate>
+          {errors.form && (
+            <p className="retro-mono" style={{ color: '#cc0000', fontSize: '0.75rem', textAlign: 'center', textShadow: '0 0 8px #cc0000', letterSpacing: '0.1em' }}>
+              {errors.form}
+            </p>
+          )}
+
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
+            <label className="retro-mono" style={{ fontSize: '0.65rem', letterSpacing: '0.3em', textTransform: 'uppercase', color: 'rgba(0,229,255,0.6)' }}>
+              Identity
+            </label>
+            <input
+              type="text"
+              value={username}
+              onChange={e => setUsername(e.target.value)}
+              placeholder="username"
+              style={inputStyle}
+            />
+            {errors.username && <p style={errorStyle}>{errors.username}</p>}
+          </div>
+
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
+            <label className="retro-mono" style={{ fontSize: '0.65rem', letterSpacing: '0.3em', textTransform: 'uppercase', color: 'rgba(0,229,255,0.6)' }}>
+              Passphrase
+            </label>
+            <input
+              type="password"
+              value={password}
+              onChange={e => setPassword(e.target.value)}
+              placeholder="••••••••"
+              style={inputStyle}
+            />
+            {errors.password && <p style={errorStyle}>{errors.password}</p>}
+          </div>
+
+          <button type="submit" className="btn-horror" style={{ marginTop: '0.5rem' }}>
+            Authenticate
+          </button>
+        </form>
+
+        <p className="retro-mono" style={{ textAlign: 'center', fontSize: '0.65rem', letterSpacing: '0.2em', color: 'rgba(232,232,224,0.25)', textTransform: 'uppercase' }}>
+          No record?{' '}
+          <Link to="/signup" style={{ color: 'rgba(0,229,255,0.5)', textDecoration: 'none', textShadow: '0 0 6px rgba(0,229,255,0.3)' }}
+            onMouseEnter={e => e.target.style.color = '#00e5ff'}
+            onMouseLeave={e => e.target.style.color = 'rgba(0,229,255,0.5)'}
+          >
+            Create identity
+          </Link>
+        </p>
+      </div>
     </div>
   )
+}
+
+const inputStyle = {
+  background: 'rgba(0,229,255,0.03)',
+  border: '1px solid rgba(0,229,255,0.2)',
+  color: '#e8e8e0',
+  fontFamily: "'Share Tech Mono', monospace",
+  fontSize: '0.85rem',
+  padding: '0.6rem 0.75rem',
+  outline: 'none',
+  width: '100%',
+  letterSpacing: '0.05em',
+  transition: 'border-color 0.2s, box-shadow 0.2s',
+}
+
+const errorStyle = {
+  color: '#cc0000',
+  fontFamily: "'Share Tech Mono', monospace",
+  fontSize: '0.7rem',
+  letterSpacing: '0.1em',
+  textShadow: '0 0 6px #cc0000',
+  margin: 0,
 }
