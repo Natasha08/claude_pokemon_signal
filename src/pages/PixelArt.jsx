@@ -138,9 +138,9 @@ export default function PixelArt() {
 
       {/* Header */}
       <div style={{ position: 'relative', zIndex: 10, display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%', maxWidth: 512 + 32 }}>
-        <button className="btn-horror-ghost" style={{ fontSize: '0.65rem', padding: '0.3rem 0.6rem' }} onClick={() => navigate('/')}>← Home</button>
+        <button className="btn-horror-ghost" style={{ fontSize: '0.65rem', padding: '0.3rem 0.6rem', width: 'fit-content' }} onClick={() => navigate('/')}>← Home</button>
         <h1 className="retro-mono text-glow-red" style={{ fontSize: '0.75rem', letterSpacing: '0.4em', textTransform: 'uppercase', margin: 0 }}>Pixel Art</h1>
-        <button className="btn-horror-ghost" style={{ fontSize: '0.65rem', padding: '0.3rem 0.6rem' }} onClick={handleExport}>Export PNG</button>
+        <button className="btn-horror-ghost" style={{ fontSize: '0.65rem', padding: '0.3rem 0.6rem', width: 'fit-content' }} onClick={handleExport}>Export PNG</button>
       </div>
 
       {/* Canvas */}
