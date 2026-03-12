@@ -1,4 +1,4 @@
-# Hello World
+# Claude Pokemon Signal
 
 ## Setup options
 
