@@ -439,22 +439,21 @@ export default function Mario() {
   }, [])
 
   return (
-    <div className="min-h-screen bg-black flex flex-col items-center justify-center gap-4">
+    <div style={{ background: '#0a0a0f', minHeight: '100vh', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: '1rem' }}>
+      <div className="scanlines" />
+      <div className="grain" />
       <canvas
         ref={canvasRef}
         width={CW}
         height={CH}
-        style={{ imageRendering: 'pixelated', border: '2px solid #222' }}
+        style={{ imageRendering: 'pixelated', border: '1px solid rgba(204,0,0,0.4)', boxShadow: '0 0 16px rgba(204,0,0,0.15)', position: 'relative', zIndex: 10 }}
       />
-      <div className="flex items-center gap-6 text-neutral-500 text-xs">
-        <span>← → / A D: move</span>
-        <span>↑ / Space / Z: jump</span>
-        <span>R: restart</span>
-        <button
-          onClick={() => navigate('/')}
-          className="text-neutral-400 hover:text-white underline underline-offset-2 transition-colors"
-        >
-          Home
+      <div style={{ position: 'relative', zIndex: 10, display: 'flex', alignItems: 'center', gap: '1.5rem' }}>
+        <span className="retro-mono" style={{ fontSize: '0.6rem', letterSpacing: '0.15em', color: 'rgba(232,232,224,0.25)' }}>← → / A D: move</span>
+        <span className="retro-mono" style={{ fontSize: '0.6rem', letterSpacing: '0.15em', color: 'rgba(232,232,224,0.25)' }}>↑ / Space: jump</span>
+        <span className="retro-mono" style={{ fontSize: '0.6rem', letterSpacing: '0.15em', color: 'rgba(232,232,224,0.25)' }}>R: restart</span>
+        <button className="btn-horror-ghost" style={{ fontSize: '0.6rem', padding: '0.3rem 0.6rem' }} onClick={() => navigate('/')}>
+          ← Home
         </button>
       </div>
     </div>

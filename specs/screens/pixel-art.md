@@ -3,6 +3,9 @@
 Route: `/pixel-art`
 Purpose: A 32×32 grid pixel art editor with drawing tools, palette, undo/redo, and PNG export.
 
+## Visual style
+Matches app horror/sci-fi aesthetic: dark background (#0a0a0f), scanlines + grain overlays, red-glow canvas border, retro-mono toolbar buttons with red active / cyan inactive states.
+
 Layout:
 - Dark background (neutral-900)
 - Top bar: ← Home, title "Pixel Art", Export PNG button

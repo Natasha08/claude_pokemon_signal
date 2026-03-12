@@ -3,6 +3,9 @@
 Route: `/mario`
 Purpose: A single-level side-scrolling platformer in the style of Mario. Accessible only when logged in.
 
+## Visual style
+Matches app horror/sci-fi aesthetic: dark background (#0a0a0f), scanlines + grain overlays, red-glow canvas border, cyan retro-mono controls legend, ghost-style Home button.
+
 Layout:
 - Black full-screen background
 - Canvas (512×448, 16×14 tiles at 32px each)

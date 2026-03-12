@@ -113,28 +113,45 @@ export default function PixelArt() {
     { id: 'fill',   label: '🪣 Fill' },
   ]
 
+  const btnStyle = (active) => ({
+    fontFamily: "'Share Tech Mono', monospace",
+    fontSize: '0.7rem',
+    letterSpacing: '0.15em',
+    textTransform: 'uppercase',
+    padding: '0.4rem 0.75rem',
+    border: active ? '1px solid #cc0000' : '1px solid rgba(0,229,255,0.25)',
+    background: active ? 'rgba(204,0,0,0.12)' : 'transparent',
+    color: active ? '#cc0000' : 'rgba(0,229,255,0.6)',
+    textShadow: active ? '0 0 6px #cc0000' : 'none',
+    boxShadow: active ? '0 0 8px rgba(204,0,0,0.3)' : 'none',
+    cursor: 'pointer',
+  })
+
   return (
     <div
-      className="min-h-screen bg-neutral-900 flex flex-col items-center justify-center gap-4 p-4 select-none"
+      style={{ background: '#0a0a0f', minHeight: '100vh', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: '1rem', padding: '1rem', userSelect: 'none' }}
       onMouseUp={handleMouseUp}
       onMouseLeave={handleMouseUp}
     >
-      <div className="flex items-center justify-between w-full max-w-2xl">
-        <button onClick={() => navigate('/')} className="text-neutral-400 hover:text-white text-sm">← Home</button>
-        <h1 className="text-white font-bold text-lg">Pixel Art</h1>
-        <button onClick={handleExport} className="text-neutral-400 hover:text-white text-sm">Export PNG</button>
+      <div className="scanlines" />
+      <div className="grain" />
+
+      {/* Header */}
+      <div style={{ position: 'relative', zIndex: 10, display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%', maxWidth: 512 + 32 }}>
+        <button className="btn-horror-ghost" style={{ fontSize: '0.65rem', padding: '0.3rem 0.6rem' }} onClick={() => navigate('/')}>← Home</button>
+        <h1 className="retro-mono text-glow-red" style={{ fontSize: '0.75rem', letterSpacing: '0.4em', textTransform: 'uppercase', margin: 0 }}>Pixel Art</h1>
+        <button className="btn-horror-ghost" style={{ fontSize: '0.65rem', padding: '0.3rem 0.6rem' }} onClick={handleExport}>Export PNG</button>
       </div>
 
       {/* Canvas */}
       <div
-        className="border border-neutral-600 cursor-crosshair"
-        style={{ display: 'grid', gridTemplateColumns: `repeat(${COLS}, ${CELL}px)` }}
+        style={{ position: 'relative', zIndex: 10, display: 'grid', gridTemplateColumns: `repeat(${COLS}, ${CELL}px)`, border: '1px solid rgba(204,0,0,0.3)', boxShadow: '0 0 12px rgba(204,0,0,0.1)', cursor: 'crosshair' }}
       >
         {grid.map((row, r) =>
           row.map((cell, c) => (
             <div
               key={`${r}-${c}`}
-              style={{ width: CELL, height: CELL, backgroundColor: cell, boxSizing: 'border-box', border: '0.5px solid rgba(100,100,100,0.2)' }}
+              style={{ width: CELL, height: CELL, backgroundColor: cell, boxSizing: 'border-box', border: '0.5px solid rgba(100,100,100,0.15)' }}
               onMouseDown={() => handleMouseDown(r, c)}
               onMouseEnter={() => handleMouseEnter(r, c)}
             />
@@ -142,64 +159,46 @@ export default function PixelArt() {
         )}
       </div>
 
-      <div className="flex flex-col gap-3 w-full max-w-2xl">
+      <div style={{ position: 'relative', zIndex: 10, display: 'flex', flexDirection: 'column', gap: '0.75rem', width: '100%', maxWidth: 512 + 32 }}>
         {/* Tools */}
-        <div className="flex gap-2">
+        <div style={{ display: 'flex', gap: '0.4rem' }}>
           {tools.map(t => (
-            <button
-              key={t.id}
-              onClick={() => setTool(t.id)}
-              className={`px-3 py-1.5 rounded text-sm font-medium transition-colors ${
-                tool === t.id
-                  ? 'bg-white text-neutral-900'
-                  : 'bg-neutral-700 text-neutral-300 hover:bg-neutral-600'
-              }`}
-            >
+            <button key={t.id} onClick={() => setTool(t.id)} style={btnStyle(tool === t.id)}>
               {t.label}
             </button>
           ))}
-          <div className="ml-auto flex gap-2">
-            <button
-              onClick={undo}
-              disabled={historyIndex === 0}
-              className="px-3 py-1.5 rounded text-sm font-medium bg-neutral-700 text-neutral-300 hover:bg-neutral-600 disabled:opacity-30"
-            >
-              Undo
-            </button>
-            <button
-              onClick={redo}
-              disabled={historyIndex >= history.length - 1}
-              className="px-3 py-1.5 rounded text-sm font-medium bg-neutral-700 text-neutral-300 hover:bg-neutral-600 disabled:opacity-30"
-            >
-              Redo
-            </button>
-            <button
-              onClick={() => pushHistory(makeGrid())}
-              className="px-3 py-1.5 rounded text-sm font-medium bg-neutral-700 text-neutral-300 hover:bg-neutral-600"
-            >
-              Clear
-            </button>
+          <div style={{ marginLeft: 'auto', display: 'flex', gap: '0.4rem' }}>
+            {[['Undo', undo, historyIndex === 0], ['Redo', redo, historyIndex >= history.length - 1], ['Clear', () => pushHistory(makeGrid()), false]].map(([label, fn, disabled]) => (
+              <button key={label} onClick={fn} disabled={disabled} style={{ ...btnStyle(false), opacity: disabled ? 0.3 : 1 }}>{label}</button>
+            ))}
           </div>
         </div>
 
         {/* Palette + custom color */}
-        <div className="flex flex-wrap gap-1.5 items-center">
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.35rem', alignItems: 'center' }}>
           {PALETTE.map(c => (
             <button
               key={c}
               onClick={() => { setColor(c); setTool('pencil') }}
-              style={{ backgroundColor: c }}
-              className={`w-7 h-7 rounded transition-transform ${color === c && tool === 'pencil' ? 'ring-2 ring-white scale-110' : 'hover:scale-110'}`}
+              style={{
+                width: 26, height: 26,
+                backgroundColor: c,
+                border: color === c && tool === 'pencil' ? '2px solid #fff' : '1px solid rgba(255,255,255,0.15)',
+                borderRadius: 2,
+                cursor: 'pointer',
+                transform: color === c && tool === 'pencil' ? 'scale(1.15)' : 'scale(1)',
+                transition: 'transform 0.1s',
+              }}
             />
           ))}
-          <label className="ml-1 flex flex-col items-center gap-0.5">
+          <label style={{ marginLeft: '0.25rem', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.2rem', cursor: 'pointer' }}>
             <input
               type="color"
               value={color}
               onChange={e => { setColor(e.target.value); setTool('pencil') }}
-              className="w-7 h-7 rounded cursor-pointer bg-transparent border-0"
+              style={{ width: 26, height: 26, border: 'none', background: 'transparent', cursor: 'pointer', padding: 0 }}
             />
-            <span className="text-neutral-500 text-xs">custom</span>
+            <span className="retro-mono" style={{ fontSize: '0.5rem', color: 'rgba(232,232,224,0.3)', letterSpacing: '0.1em' }}>custom</span>
           </label>
         </div>
       </div>

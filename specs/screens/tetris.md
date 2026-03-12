@@ -3,6 +3,9 @@
 Route: `/tetris`
 Purpose: Playable Tetris game, accessible only when logged in.
 
+## Visual style
+Matches app horror/sci-fi aesthetic: dark background (#0a0a0f), scanlines + grain overlays, red-glow board border, cyan retro-mono sidebar labels, horror-style buttons.
+
 Layout:
 - Dark full-screen background
 - Game board (10×20) on the left

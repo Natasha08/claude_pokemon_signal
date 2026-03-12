@@ -3,6 +3,9 @@
 Route: `/drum-machine`
 Purpose: A 16-step drum sequencer with synthesized sounds, accessible only when logged in.
 
+## Visual style
+Matches app horror/sci-fi aesthetic: dark background (#0a0a0f), scanlines + grain overlays, cyan retro-mono labels, red horror-style Play/Stop button, red accent color on BPM slider.
+
 Layout:
 - Dark full-screen background
 - Header with title and Home button

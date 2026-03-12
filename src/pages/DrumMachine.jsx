@@ -1,6 +1,5 @@
 import { useState, useEffect, useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { Button } from '@/components/ui/button'
 
 const STEPS = 16
 const DEFAULT_BPM = 120
@@ -177,41 +176,41 @@ export default function DrumMachine() {
   }
 
   return (
-    <div className="min-h-screen bg-neutral-950 flex items-center justify-center px-6 py-10">
-      <div className="flex flex-col gap-6 w-full max-w-3xl">
+    <div style={{ background: '#0a0a0f', minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '1.5rem 2rem' }}>
+      <div className="scanlines" />
+      <div className="grain" />
+      <div style={{ position: 'relative', zIndex: 10, display: 'flex', flexDirection: 'column', gap: '1.5rem', width: '100%', maxWidth: '720px' }}>
 
         {/* Header */}
-        <div className="flex items-center justify-between">
-          <h1 className="text-white text-xl font-semibold tracking-tight">Drum Machine</h1>
-          <Button
-            size="sm"
-            variant="outline"
-            className="border-neutral-700 text-neutral-300 hover:bg-neutral-800 hover:text-white bg-transparent"
-            onClick={() => navigate('/')}
-          >
-            Home
-          </Button>
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+          <h1 className="retro-mono text-glow-red" style={{ fontSize: '0.75rem', letterSpacing: '0.4em', textTransform: 'uppercase', margin: 0 }}>
+            Drum Machine
+          </h1>
+          <button className="btn-horror-ghost" style={{ fontSize: '0.65rem', padding: '0.3rem 0.75rem', width: 'fit-content' }} onClick={() => navigate('/')}>
+            ← Home
+          </button>
         </div>
 
         {/* Step grid */}
-        <div className="flex flex-col gap-2">
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
           {INSTRUMENTS.map(({ id, name, color }) => (
-            <div key={id} className="flex items-center gap-3">
-              <span className="text-neutral-400 text-xs w-14 text-right shrink-0">{name}</span>
-              <div className="flex gap-1">
+            <div key={id} style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+              <span className="retro-mono" style={{ fontSize: '0.6rem', letterSpacing: '0.15em', color: 'rgba(0,229,255,0.5)', width: '3.5rem', textAlign: 'right', flexShrink: 0, textTransform: 'uppercase' }}>{name}</span>
+              <div style={{ display: 'flex', gap: '3px' }}>
                 {Array.from({ length: STEPS }, (_, step) => (
                   <button
                     key={step}
                     onClick={() => toggleCell(id, step)}
-                    className={[
-                      'w-9 h-9 rounded-sm border transition-colors',
-                      step % 4 === 0 ? 'border-neutral-600' : 'border-neutral-700',
-                      grid[id][step]
-                        ? `${color} border-transparent`
-                        : currentStep === step && playing
-                          ? 'bg-neutral-700'
-                          : 'bg-neutral-800 hover:bg-neutral-700',
-                    ].join(' ')}
+                    className={grid[id][step] ? color : ''}
+                    style={{
+                      width: 34, height: 34,
+                      border: step % 4 === 0 ? '1px solid rgba(204,0,0,0.35)' : '1px solid rgba(255,255,255,0.07)',
+                      borderRadius: 2,
+                      background: grid[id][step] ? undefined : currentStep === step && playing ? 'rgba(0,229,255,0.12)' : 'rgba(255,255,255,0.03)',
+                      boxShadow: grid[id][step] ? '0 0 6px rgba(255,255,255,0.2)' : 'none',
+                      cursor: 'pointer',
+                      transition: 'background 0.05s',
+                    }}
                   />
                 ))}
               </div>
@@ -220,29 +219,24 @@ export default function DrumMachine() {
         </div>
 
         {/* Controls */}
-        <div className="flex items-center gap-4">
-          <Button className="w-20" onClick={playing ? stop : start}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+          <button className="btn-horror" style={{ width: '5rem', fontSize: '0.75rem', padding: '0.5rem' }} onClick={playing ? stop : start}>
             {playing ? 'Stop' : 'Play'}
-          </Button>
-          <Button
-            size="sm"
-            variant="outline"
-            className="border-neutral-700 text-neutral-400 hover:bg-neutral-800 hover:text-white bg-transparent"
-            onClick={() => { stop(); setGrid(initGrid()) }}
-          >
+          </button>
+          <button className="btn-horror-ghost" style={{ fontSize: '0.7rem', padding: '0.5rem 0.75rem', width: 'fit-content' }} onClick={() => { stop(); setGrid(initGrid()) }}>
             Clear
-          </Button>
-          <div className="flex items-center gap-3 ml-auto">
-            <span className="text-neutral-400 text-sm">BPM</span>
+          </button>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginLeft: 'auto' }}>
+            <span className="retro-mono" style={{ fontSize: '0.65rem', letterSpacing: '0.2em', color: 'rgba(0,229,255,0.5)' }}>BPM</span>
             <input
               type="range"
               min={60}
               max={200}
               value={bpm}
               onChange={(e) => setBpm(Number(e.target.value))}
-              className="w-32 accent-white"
+              style={{ width: 120, accentColor: '#cc0000' }}
             />
-            <span className="text-white font-mono text-sm w-8">{bpm}</span>
+            <span className="retro-mono" style={{ fontSize: '0.8rem', color: '#e8e8e0', textShadow: '0 0 6px rgba(232,232,224,0.3)', width: '2rem' }}>{bpm}</span>
           </div>
         </div>
 

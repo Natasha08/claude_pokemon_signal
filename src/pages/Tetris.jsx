@@ -1,6 +1,5 @@
-import { useEffect, useReducer, useCallback } from 'react'
+import { useEffect, useReducer } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { Button } from '@/components/ui/button'
 
 const COLS = 10
 const ROWS = 20
@@ -186,13 +185,15 @@ export default function Tetris() {
   }))
 
   return (
-    <div className="min-h-screen bg-neutral-950 flex items-center justify-center px-4">
-      <div className="flex gap-8 items-start">
+    <div style={{ background: '#0a0a0f', minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '1rem' }}>
+      <div className="scanlines" />
+      <div className="grain" />
+      <div style={{ position: 'relative', zIndex: 10, display: 'flex', gap: '2rem', alignItems: 'flex-start' }}>
 
         {/* Board */}
-        <div className="border border-neutral-700">
+        <div style={{ border: '1px solid rgba(204,0,0,0.4)', boxShadow: '0 0 12px rgba(204,0,0,0.2)' }}>
           {display.map((row, r) => (
-            <div key={r} className="flex">
+            <div key={r} style={{ display: 'flex' }}>
               {row.map((cell, c) => {
                 const isGhost = !cell && !state.gameOver && ghost.shape.some((gr, ri) =>
                   gr.some((gc, ci) => gc && ghost.x + ci === c && ghost.y + ri === r)
@@ -200,9 +201,12 @@ export default function Tetris() {
                 return (
                   <div
                     key={c}
-                    className={`w-7 h-7 border border-neutral-800 ${
-                      cell ? cell : isGhost ? 'bg-neutral-700' : 'bg-neutral-900'
-                    }`}
+                    className={cell ? cell : ''}
+                    style={{
+                      width: 28, height: 28,
+                      border: '1px solid rgba(255,255,255,0.05)',
+                      background: cell ? undefined : isGhost ? 'rgba(255,255,255,0.08)' : 'rgba(10,10,15,0.95)',
+                    }}
                   />
                 )
               })}
@@ -211,49 +215,44 @@ export default function Tetris() {
         </div>
 
         {/* Sidebar */}
-        <div className="flex flex-col gap-5 w-28">
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem', width: '7rem' }}>
+          {[['Score', state.score, '1.5rem'], ['Lines', state.lines, '1.25rem'], ['Level', state.level, '1.25rem']].map(([label, val, size]) => (
+            <div key={label}>
+              <p className="retro-mono" style={{ fontSize: '0.6rem', letterSpacing: '0.3em', color: 'rgba(0,229,255,0.5)', marginBottom: '0.25rem' }}>{label}</p>
+              <p className="retro-mono" style={{ fontSize: size, color: '#e8e8e0', textShadow: '0 0 6px rgba(232,232,224,0.3)', margin: 0 }}>{val}</p>
+            </div>
+          ))}
+
           <div>
-            <p className="text-neutral-500 text-xs uppercase tracking-widest mb-1">Score</p>
-            <p className="text-white text-2xl font-mono">{state.score}</p>
-          </div>
-          <div>
-            <p className="text-neutral-500 text-xs uppercase tracking-widest mb-1">Lines</p>
-            <p className="text-white text-xl font-mono">{state.lines}</p>
-          </div>
-          <div>
-            <p className="text-neutral-500 text-xs uppercase tracking-widest mb-1">Level</p>
-            <p className="text-white text-xl font-mono">{state.level}</p>
-          </div>
-          <div>
-            <p className="text-neutral-500 text-xs uppercase tracking-widest mb-2">Next</p>
+            <p className="retro-mono" style={{ fontSize: '0.6rem', letterSpacing: '0.3em', color: 'rgba(0,229,255,0.5)', marginBottom: '0.5rem' }}>Next</p>
             {nextGrid.map((row, r) => (
-              <div key={r} className="flex">
+              <div key={r} style={{ display: 'flex' }}>
                 {row.map((cell, c) => (
-                  <div key={c} className={`w-5 h-5 ${cell || 'bg-transparent'}`} />
+                  <div key={c} className={cell || ''} style={{ width: 20, height: 20, background: cell ? undefined : 'transparent' }} />
                 ))}
               </div>
             ))}
           </div>
 
-          <div className="flex flex-col gap-2">
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
             {state.gameOver && (
-              <p className="text-red-400 text-sm font-semibold">Game over</p>
+              <p className="retro-mono pulse-glow text-glow-red" style={{ fontSize: '0.7rem', letterSpacing: '0.15em' }}>GAME OVER</p>
             )}
             {state.gameOver && (
-              <Button size="sm" onClick={() => dispatch({ type: 'RESET' })}>
-                Play again
-              </Button>
+              <button className="btn-horror" style={{ fontSize: '0.7rem', padding: '0.4rem 0.5rem' }} onClick={() => dispatch({ type: 'RESET' })}>
+                Restart
+              </button>
             )}
-            <Button size="sm" variant="outline" className="border-neutral-700 text-neutral-300 hover:bg-neutral-800 hover:text-white bg-transparent" onClick={() => navigate('/')}>
+            <button className="btn-horror-ghost" style={{ fontSize: '0.7rem', padding: '0.4rem 0.5rem' }} onClick={() => navigate('/')}>
               Quit
-            </Button>
+            </button>
           </div>
 
-          <div className="text-neutral-600 text-xs space-y-1">
-            <p>← → move</p>
-            <p>↑ rotate</p>
-            <p>↓ soft drop</p>
-            <p>space hard drop</p>
+          <div className="retro-mono" style={{ fontSize: '0.6rem', color: 'rgba(232,232,224,0.2)', lineHeight: 1.8 }}>
+            <p style={{ margin: 0 }}>← → move</p>
+            <p style={{ margin: 0 }}>↑ rotate</p>
+            <p style={{ margin: 0 }}>↓ drop</p>
+            <p style={{ margin: 0 }}>space hard</p>
           </div>
         </div>
 
