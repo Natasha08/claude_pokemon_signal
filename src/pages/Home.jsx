@@ -131,7 +131,7 @@ export default function Home() {
           )}
 
           {/* Footer */}
-          <p className="retro-mono" style={{ fontSize: '0.55rem', letterSpacing: '0.3em', color: 'rgba(0,229,255,0.15)', textTransform: 'uppercase' }}>
+          <p className="retro-mono" style={{ fontSize: '0.55rem', letterSpacing: '0.3em', color: 'rgba(0,229,255,0.35)', textTransform: 'uppercase' }}>
             © 1987 — ALL RIGHTS RESERVED — DO NOT TRANSMIT
           </p>
 

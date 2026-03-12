@@ -169,7 +169,7 @@ export default function PixelArt() {
           ))}
           <div style={{ marginLeft: 'auto', display: 'flex', gap: '0.4rem' }}>
             {[['Undo', undo, historyIndex === 0], ['Redo', redo, historyIndex >= history.length - 1], ['Clear', () => pushHistory(makeGrid()), false]].map(([label, fn, disabled]) => (
-              <button key={label} onClick={fn} disabled={disabled} style={{ ...btnStyle(false), opacity: disabled ? 0.3 : 1 }}>{label}</button>
+              <button key={label} onClick={fn} disabled={disabled} style={{ ...btnStyle(false), opacity: disabled ? 0.5 : 1 }}>{label}</button>
             ))}
           </div>
         </div>
