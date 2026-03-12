@@ -14,24 +14,24 @@ export function AuthProvider({ children }) {
       .finally(() => setLoading(false))
   }, [])
 
-  async function signup({ name, username, email, password }) {
+  async function signup({ username, password }) {
     const res = await fetch(`${API}/signup`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       credentials: 'include',
-      body: JSON.stringify({ name, username, email, password }),
+      body: JSON.stringify({ username, password }),
     })
     const data = await res.json()
     if (!res.ok) throw new Error(data.error)
     setCurrentUser(data.user)
   }
 
-  async function login({ email, password }) {
+  async function login({ username, password }) {
     const res = await fetch(`${API}/login`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       credentials: 'include',
-      body: JSON.stringify({ email, password }),
+      body: JSON.stringify({ username, password }),
     })
     const data = await res.json()
     if (!res.ok) throw new Error(data.error)

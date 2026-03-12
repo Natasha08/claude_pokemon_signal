@@ -9,21 +9,21 @@ import { useAuth } from '@/context/AuthContext'
 export default function Login() {
   const navigate = useNavigate()
   const { login } = useAuth()
-  const [email, setEmail] = useState('')
+  const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [errors, setErrors] = useState({})
 
   function handleSubmit(e) {
     e.preventDefault()
     const next = {}
-    if (!email.trim()) next.email = 'Email is required'
+    if (!username.trim()) next.username = 'Username is required'
     if (!password.trim()) next.password = 'Password is required'
     if (Object.keys(next).length > 0) {
       setErrors(next)
       return
     }
     try {
-      login({ email, password })
+      login({ username, password })
       navigate('/')
     } catch (err) {
       setErrors({ form: err.message })
@@ -42,15 +42,15 @@ export default function Login() {
               <p className="text-sm text-red-500 text-center">{errors.form}</p>
             )}
             <div className="flex flex-col gap-1.5">
-              <Label htmlFor="email">Email</Label>
+              <Label htmlFor="username">Username</Label>
               <Input
-                id="email"
-                type="email"
-                placeholder="you@example.com"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                id="username"
+                type="text"
+                placeholder="janesmith"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
               />
-              {errors.email && <p className="text-sm text-red-500">{errors.email}</p>}
+              {errors.username && <p className="text-sm text-red-500">{errors.username}</p>}
             </div>
             <div className="flex flex-col gap-1.5">
               <Label htmlFor="password">Password</Label>

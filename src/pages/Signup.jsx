@@ -9,25 +9,21 @@ import { useAuth } from '@/context/AuthContext'
 export default function Signup() {
   const navigate = useNavigate()
   const { signup } = useAuth()
-  const [name, setName] = useState('')
   const [username, setUsername] = useState('')
-  const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [errors, setErrors] = useState({})
 
   function handleSubmit(e) {
     e.preventDefault()
     const next = {}
-    if (!name.trim()) next.name = 'Name is required'
     if (!username.trim()) next.username = 'Username is required'
-    if (!email.trim()) next.email = 'Email is required'
     if (!password.trim()) next.password = 'Password is required'
     if (Object.keys(next).length > 0) {
       setErrors(next)
       return
     }
     try {
-      signup({ name, username, email, password })
+      signup({ username, password })
       navigate('/')
     } catch (err) {
       setErrors({ form: err.message })
@@ -46,17 +42,6 @@ export default function Signup() {
               <p className="text-sm text-red-500 text-center">{errors.form}</p>
             )}
             <div className="flex flex-col gap-1.5">
-              <Label htmlFor="name">Name</Label>
-              <Input
-                id="name"
-                type="text"
-                placeholder="Jane Smith"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-              />
-              {errors.name && <p className="text-sm text-red-500">{errors.name}</p>}
-            </div>
-            <div className="flex flex-col gap-1.5">
               <Label htmlFor="username">Username</Label>
               <Input
                 id="username"
@@ -66,17 +51,6 @@ export default function Signup() {
                 onChange={(e) => setUsername(e.target.value)}
               />
               {errors.username && <p className="text-sm text-red-500">{errors.username}</p>}
-            </div>
-            <div className="flex flex-col gap-1.5">
-              <Label htmlFor="email">Email</Label>
-              <Input
-                id="email"
-                type="email"
-                placeholder="you@example.com"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-              />
-              {errors.email && <p className="text-sm text-red-500">{errors.email}</p>}
             </div>
             <div className="flex flex-col gap-1.5">
               <Label htmlFor="password">Password</Label>
