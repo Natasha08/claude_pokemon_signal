@@ -11,6 +11,7 @@ export default function Signup() {
   const { signup } = useAuth()
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
+  const [confirm, setConfirm] = useState('')
   const [errors, setErrors] = useState({})
 
   function handleSubmit(e) {
@@ -18,6 +19,8 @@ export default function Signup() {
     const next = {}
     if (!username.trim()) next.username = 'Username is required'
     if (!password.trim()) next.password = 'Password is required'
+    else if (password.length < 4) next.password = 'Password must be at least 4 characters'
+    else if (password !== confirm) next.confirm = 'Passwords do not match'
     if (Object.keys(next).length > 0) {
       setErrors(next)
       return
@@ -62,6 +65,17 @@ export default function Signup() {
                 onChange={(e) => setPassword(e.target.value)}
               />
               {errors.password && <p className="text-sm text-red-500">{errors.password}</p>}
+            </div>
+            <div className="flex flex-col gap-1.5">
+              <Label htmlFor="confirm">Confirm Password</Label>
+              <Input
+                id="confirm"
+                type="password"
+                placeholder="••••••••"
+                value={confirm}
+                onChange={(e) => setConfirm(e.target.value)}
+              />
+              {errors.confirm && <p className="text-sm text-red-500">{errors.confirm}</p>}
             </div>
             <Button type="submit" className="w-full mt-2">Sign Up</Button>
           </form>

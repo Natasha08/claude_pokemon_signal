@@ -10,5 +10,8 @@ await sql`
   )
 `
 
+await sql`ALTER TABLE users DROP COLUMN IF EXISTS name`
+await sql`ALTER TABLE users DROP COLUMN IF EXISTS email`
+
 console.log('Migration complete')
 await sql.end()
