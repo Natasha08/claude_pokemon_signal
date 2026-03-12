@@ -5,6 +5,7 @@ const GAMES = [
   { label: 'Tetris',       path: '/tetris' },
   { label: 'Drum Machine', path: '/drum-machine' },
   { label: 'Mario',        path: '/mario' },
+  { label: 'Pixel Art',    path: '/pixel-art' },
 ]
 
 export default function Home() {
