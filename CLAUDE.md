@@ -32,6 +32,8 @@ Each commit message should include:
 - The exact prompt the user entered that led to the changes
 - A bullet list of files changed and what changed in each
 
+When the prompt is a short reply to something Claude suggested (e.g. "yes", "do that", "can't i automate that"), add a sentence of context explaining what the user was responding to.
+
 Example:
 ```
 Add ORIGIN env var for CORS config
