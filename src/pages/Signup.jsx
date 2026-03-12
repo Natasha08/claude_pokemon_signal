@@ -14,7 +14,7 @@ export default function Signup() {
   const [confirm, setConfirm] = useState('')
   const [errors, setErrors] = useState({})
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault()
     const next = {}
     if (!username.trim()) next.username = 'Username is required'
@@ -26,7 +26,7 @@ export default function Signup() {
       return
     }
     try {
-      signup({ username, password })
+      await signup({ username, password })
       navigate('/')
     } catch (err) {
       setErrors({ form: err.message })

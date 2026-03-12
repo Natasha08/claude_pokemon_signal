@@ -13,7 +13,7 @@ export default function Login() {
   const [password, setPassword] = useState('')
   const [errors, setErrors] = useState({})
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault()
     const next = {}
     if (!username.trim()) next.username = 'Username is required'
@@ -23,7 +23,7 @@ export default function Login() {
       return
     }
     try {
-      login({ username, password })
+      await login({ username, password })
       navigate('/')
     } catch (err) {
       setErrors({ form: err.message })
