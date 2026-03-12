@@ -1,0 +1,22 @@
+#!/bin/sh
+# Warn if no specs/ files are staged in this commit.
+# Skippable with: git commit --no-verify (use sparingly)
+
+staged=$(git diff --cached --name-only)
+
+# Skip if this is a pure CLAUDE.md / memory / config-only commit
+code_changed=$(echo "$staged" | grep -E '\.(jsx?|ts|tsx|css|json)$' | grep -v '\.env')
+
+if [ -n "$code_changed" ]; then
+  specs_changed=$(echo "$staged" | grep '^specs/')
+  if [ -z "$specs_changed" ]; then
+    echo ""
+    echo "⚠️  WARNING: Code files changed but no specs/ files are staged."
+    echo "   If behavior, UI, API, schema, or env vars changed, update the relevant spec."
+    echo "   To skip this check: git commit --no-verify"
+    echo ""
+    exit 1
+  fi
+fi
+
+exit 0

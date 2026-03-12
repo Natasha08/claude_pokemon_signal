@@ -9,6 +9,7 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "server": "node --watch server/index.js",
+    "setup": "cp scripts/pre-commit .git/hooks/pre-commit && chmod +x .git/hooks/pre-commit",
     "migrate": "node server/migrate.js",
     "start": "npm run migrate && node server/index.js"
   },

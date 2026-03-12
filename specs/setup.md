@@ -8,8 +8,9 @@
 ```bash
 mise install          # install Node.js
 npm install           # install dependencies
-createdb hello_world  # create the database
+npm run setup         # install git hooks
 cp .env.example .env  # copy env template — fill in values
+createdb hello_world  # create the database
 npm run migrate       # create tables
 ```
 
@@ -36,19 +37,13 @@ npm run dev      # Vite frontend on http://localhost:5173
 
 A pre-commit hook blocks commits that change code files without also touching a `specs/` file. This enforces keeping specs in sync with the code.
 
-The hook lives at `.git/hooks/pre-commit` — it is not committed to the repo, so each contributor needs to install it manually:
-
-```bash
-cp .git/hooks/pre-commit.sample .git/hooks/pre-commit  # if starting fresh
-chmod +x .git/hooks/pre-commit
-```
-
-Or just re-run the hook setup from CLAUDE.md if pairing with Claude Code. To bypass in a genuine exception: `git commit --no-verify`.
+The hook source lives at `scripts/pre-commit` and is installed by `npm run setup`. To bypass in a genuine exception: `git commit --no-verify`.
 
 ## All commands
 
 | Command            | Description                              |
 |--------------------|------------------------------------------|
+| `npm run setup`    | Install git hooks (run once after clone) |
 | `npm run dev`      | Start Vite frontend (port 5173)          |
 | `npm run server`   | Start Express API server (port 3001)     |
 | `npm run migrate`  | Create database tables                   |
