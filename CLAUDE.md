@@ -24,5 +24,23 @@ Memory files live in `~/.claude/projects/-Users-natashaosborne-Projects-Engineer
 - The exact prompt the user sent
 - Bullet list of files created or modified and what changed
 
+## Commit messages
+
+Each commit message should include:
+- A short subject line summarizing the change
+- A blank line
+- The exact prompt the user entered that led to the changes
+- A bullet list of files changed and what changed in each
+
+Example:
+```
+Add ORIGIN env var for CORS config
+
+Prompt: "I need an environment variable for origin then. written similar to PORT, default to localhost, and add it to .env"
+
+- server/index.js: added ORIGIN constant from process.env.ORIGIN, used in CORS origin config
+- .env: added ORIGIN=http://localhost:5173
+```
+
 ## last save point
 claude --resume e9af5f8f-818b-4053-9628-d3d02e3cd57e
