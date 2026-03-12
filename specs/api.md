@@ -20,17 +20,17 @@ Base path: `/api/auth`
 
 ### POST /api/auth/signup
 ```json
-{ "name": "", "username": "", "email": "", "password": "" }
+{ "username": "", "password": "" }
 ```
 
 ### POST /api/auth/login
 ```json
-{ "email": "", "password": "" }
+{ "username": "", "password": "" }
 ```
 
 ### Success response (signup / login / me)
 ```json
-{ "user": { "id": 1, "name": "", "username": "", "email": "" } }
+{ "user": { "id": 1, "username": "" } }
 ```
 
 ### Error response

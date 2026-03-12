@@ -6,7 +6,7 @@ Purpose: Allows existing users to authenticate.
 Layout:
 - Centered card on full screen
 - Title: "Welcome back"
-- Email input
+- Username input
 - Password input
 - Submit button: "Log In"
 - Link below: "Don't have an account? Sign up" → navigates to /signup

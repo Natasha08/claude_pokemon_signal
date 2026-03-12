@@ -21,6 +21,7 @@ Copy `.env.example` to `.env`. Never commit `.env` — it is gitignored.
 | `DATABASE_URL` | Postgres connection string                       | required  |
 | `JWT_SECRET`   | Long random string for signing session JWTs      | required  |
 | `PORT`         | Port for the API server                          | `3001`    |
+| `ORIGIN`       | Allowed CORS origin for the frontend             | `http://localhost:5173` |
 
 ## Running
 

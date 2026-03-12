@@ -11,6 +11,8 @@ This project uses [mise](https://mise.jdx.dev/) to manage tooling. Run `mise ins
 ## Spec
 Read the spec in `/specs/app.md` to build the app
 
+**Keep specs up to date:** Any time you change behavior, UI, API shapes, database schema, or environment variables, update the relevant spec files in `/specs/` in the same commit.
+
 ## Memory
 
 Memory files live in `~/.claude/projects/-Users-natashaosborne-Projects-Engineering-hello-world/memory/`.
